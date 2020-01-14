@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:clipToPadding="false"
+    android:focusableInTouchMode="true"
+    android:background="@color/messagePageBg"
+    tools:context="com.example.emojiigame.ui.screens.MainActivity">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:id="@+id/messageList"
+        android:layout_weight="2"
+        android:divider="@null"
+        android:dividerHeight="0dp"
+        android:layout_height="wrap_content"
+        />
+
+    <ImageView
+        android:id="@+id/typingIndicaor"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:src="@drawable/typing_gif"
+        android:layout_gravity="left"
+        android:layout_marginLeft="15dp"
+        android:foregroundGravity="left"/>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/answer_message_box_shape"
+        android:layout_margin="15dp"
+        android:padding="5dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/answerEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical"
+            android:hint="Type a message..."
+            android:inputType="text"
+            android:textColor="@color/editTextColor"
+            android:textColorHint="@color/textHintColor"
+            android:fontFamily="sans-serif-light"
+            android:background="@android:color/transparent"
+            android:paddingHorizontal="10dp"/>
+
+        <ImageButton
+            android:id="@+id/voiceTextBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:scaleType="fitCenter"
+            android:padding="15dp"
+            android:onClick="onVoiceBtnClicked"
+            android:layout_marginHorizontal="10dp"
+            android:background="@drawable/voice_btn_selector"/>
+    </LinearLayout>
+</LinearLayout>

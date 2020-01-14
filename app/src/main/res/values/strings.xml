@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">EmojiiGame</string>
+    <string name="EMOJIGM_PREFERENCE">pref_file_emoji_game</string>
+    <string name="pref_first_open">pref_first_open</string>
+    <string name="pref_first_question">pref_first_question</string>
+    <string name="welcome_message">Welcome to the emoji game 💪🔥! The goal of the game is to guess the title of the movie, tv show, or celebrity depicted in emoji\'s shown below. And dont worry if you\'re not sure the answer to the question, i\'ll tell you how hot or cold you are to answering it 😊. At any point in the game feel free to text \'help\' for helpful information about the game. Good luck!</string>
+    <string name="help_message">Hello fellow Emojier 😃!\nThe Emoji game is a game where you can guess various shows 📺, celebrities 💃, and movies 🎥. If you ever run into a snag 🤔 and or would just like to move on to the next question simply text \'next question\' or \'next\'. If you just can\'t figure out the answer to one of the questions you can text \'reveal\' to show the answer.\nHave fun and good luck 🤞🏿!</string>
+</resources>

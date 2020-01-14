@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#88003ACC</color>
+    <color name="colorPrimaryDark">#88002CA0</color>
+    <color name="colorAccent">#DD6F82</color>
+    <color name="spashBackground">#8878ECBE</color>
+    <color name="messageSend">#88003ACC</color>
+    <color name="messageRecieve">#88CCCCCC</color>
+    <color name="messagePageBg">#F5F5F5</color>
+    <color name="textHintColor">#C7C6C6</color>
+    <color name="editTextColor">#979797</color>
+    <color name="editTextBg">#E2E1E1</color>
+</resources>
