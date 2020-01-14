@@ -5,6 +5,7 @@
     android:paddingVertical="10dp"
     android:paddingLeft="15dp"
     android:paddingRight="60dp"
+    android:id="@+id/messageContainer"
     android:background="@color/messagePageBg"
     android:clipToPadding="false">
 

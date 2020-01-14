@@ -25,31 +25,25 @@ class RecyclerViewAdapter(val context : Activity, var results: ArrayList<Message
 
     private var lastPosition = results.size - 1
     class ViewHolder(v : View) : RecyclerView.ViewHolder(v) {
-
-        var messageSendLayout: RelativeLayout
-        var messageRecieveLayout: RelativeLayout
-        var messageSendTv: TextView
-        var messageRecieveTv: TextView
-        init {
-            messageSendLayout = v.findViewById(R.id.msgSendLayout)
-            messageRecieveLayout = v.findViewById(R.id.msgRecieveLayout)
-            messageSendTv = v.findViewById(R.id.messageSendBody)
-            messageRecieveTv = v.findViewById(R.id.messageRecieveBody)
-        }
-
+        var messageBody: TextView = v.findViewById(R.id.messageBody)
+        var messageContainer: RelativeLayout = v.findViewById(R.id.messageContainer)
     }
 
     override fun getItemViewType(position: Int): Int {
+        val msg = results[position]
 
-
-
-        return super.getItemViewType(position)
+        return if(msg.type == MessageType.MESAGE_SENT) {
+            MessageType.MESAGE_SENT.value
+        } else {
+            MessageType.MESSAGE_RECIEVED.value
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val v = LayoutInflater.from(parent.context)
 
-            .inflate(R.layout.base_message_layout, parent, false)
+            .inflate(if(viewType == MessageType.MESSAGE_RECIEVED.value)
+                R.layout.message_recieve_layout else R.layout.message_send_layout, parent, false)
         return ViewHolder(v)
 
     }
@@ -58,13 +52,11 @@ class RecyclerViewAdapter(val context : Activity, var results: ArrayList<Message
         val msg = results[position]
 
         if(msg.type == MessageType.MESAGE_SENT) {
-            holder.messageRecieveLayout.visibility = View.GONE
-            holder.messageSendTv.setText(msg.message)
-            setAnim(holder.messageSendLayout, R.anim.right_left_anim, position)
+            holder.messageBody.text = msg.message
+            setAnim(holder.messageContainer, R.anim.right_left_anim, position)
         } else {
-            holder.messageSendLayout.visibility = View.GONE
-            holder.messageRecieveTv.setText(msg.message)
-            setAnim(holder.messageRecieveLayout, R.anim.left_right_anim, position)
+            holder.messageBody.text = msg.message
+            setAnim(holder.messageContainer, R.anim.left_right_anim, position)
         }
     }
 
