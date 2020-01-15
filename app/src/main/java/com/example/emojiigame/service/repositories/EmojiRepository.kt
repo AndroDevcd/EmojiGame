@@ -14,8 +14,6 @@ class EmojiRepository {
     // TODO: I ned a way to persist the daa beyond the session of the app
 
     companion object {
-        private var localMessageList : ArrayList<Message> = arrayListOf();
-
         // list of commands that we check for on the UI side
         val NEXT_QUES = "next-question"
         val questions : ArrayList<EmojiQuetion> by lazy {
@@ -45,9 +43,8 @@ class EmojiRepository {
             return Message(randomQuestion.question, MessageType.MESSAGE_RECIEVED)
         }
 
-        fun getWelcomeMessage(data: MutableLiveData<Resource<ArrayList<Message>>>) {
-            localMessageList.add(Message(getString(R.string.welcome_message), MessageType.MESSAGE_RECIEVED))
-            data.value = Resource(Status.SUCCESS, localMessageList, "")
+        fun getWelcomeMessage() : String {
+            return getString(R.string.welcome_message)
         }
     }
 

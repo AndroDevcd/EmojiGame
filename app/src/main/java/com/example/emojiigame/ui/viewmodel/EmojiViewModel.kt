@@ -25,15 +25,15 @@ class EmojiViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun postWelcomeMessage() {
-        EmojiRepository.getWelcomeMessage(data);
+        postMessage(EmojiRepository.getWelcomeMessage())
     }
 
-    fun postMessage(msg : String) {
+    fun postMessage(msg : String, type : MessageType = MessageType.MESSAGE_RECIEVED, command : String? = null) {
         appendMsg(
             Message(
                 msg,
-                MessageType.MESSAGE_RECIEVED
-            )
+                type
+            ), command
         )
     }
 
@@ -55,12 +55,8 @@ class EmojiViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun gameLoop(userAnswer : String) {
-        appendMsg(
-            Message(
-                userAnswer,
-                MessageType.MESAGE_SENT
-            )
-        )
+
+        postMessage(userAnswer, MessageType.MESAGE_SENT)
         data.value = Resource.loading(data.value)
         doLater(Random.nextLong(500, 2000), null, fun (args : Any?) {
             var questionList = EmojiRepository.questions
@@ -78,40 +74,20 @@ class EmojiViewModel(application: Application) : AndroidViewModel(application) {
 
                 var emojiQuestion = questionList.find { it.question == gameQuestion }
                 if(userAnswer.contains("help")) {
-                    appendMsg(
-                        Message(
-                            getString(R.string.help_message),
-                            MessageType.MESSAGE_RECIEVED
-                        )
-                    )
+                    postMessage(getString(R.string.help_message))
                 } else if(userAnswer.contains("next question") || userAnswer.contains("next")) {
-                    appendMsg(
-                        Message(
-                            "Got it! Here's your next question.",
-                            MessageType.MESSAGE_RECIEVED
-                        ), EmojiRepository.NEXT_QUES
-                    )
+                    postMessage(msg = "Got it! Here's your next question.", command = EmojiRepository.NEXT_QUES)
                 } else if(userAnswer.contains("reveal")) {
-                    appendMsg(
-                        Message(
-                            "Here's the answer to the question: " + emojiQuestion?.answer,
-                            MessageType.MESSAGE_RECIEVED
-                        ), EmojiRepository.NEXT_QUES
-                    )
+                    postMessage(msg = "Here's the answer to the question: " + emojiQuestion?.answer, command =  EmojiRepository.NEXT_QUES)
                 } else {
                     if (emojiQuestion != null) {
                         checkAnswer(emojiQuestion, userAnswer)
                     } else {
-                        appendMsg(
-                            Message(
-                                "It appears that my developer likes bugs \uD83D\uDE14, unfortunately I am unable to respond to your request.",
-                                MessageType.MESSAGE_RECIEVED
-                            )
-                        )
+                        postMessage("It appears that my developer likes bugs \uD83D\uDE14, unfortunately I am unable to respond to your request.")
                     }
                 }
             } else {
-                appendMsg(Message("I am sorry, I do not understand. Please text \"help\" for more info on how to play the game.", MessageType.MESSAGE_RECIEVED))
+                postMessage("I am sorry, I do not understand. Please text \"help\" for more info on how to play the game.")
             }
         })
     }
@@ -133,48 +109,23 @@ class EmojiViewModel(application: Application) : AndroidViewModel(application) {
 
         when(userAccuracy){
             in 90..100 -> {
-                appendMsg(
-                    Message(
-                        "Awesome you're correct \uD83D\uDE00!",
-                        MessageType.MESSAGE_RECIEVED
-                    ), EmojiRepository.NEXT_QUES
-                )
+                postMessage(msg = "Awesome you're correct \uD83D\uDE00!", command =  EmojiRepository.NEXT_QUES)
             }
 
             in 70..89 -> {
-                appendMsg(
-                    Message(
-                        "You are really close \uD83D\uDC4C, but not quite the answer I was looking for, try modifying your answer slightly.",
-                        MessageType.MESSAGE_RECIEVED
-                    )
-                )
+                postMessage("You are really close \uD83D\uDC4C, but not quite the answer I was looking for, try modifying your answer slightly.")
             }
 
             in 30..69 -> {
-                appendMsg(
-                    Message(
-                        "You're on the right track \uD83D\uDC4D but not exactly what I was looking for.",
-                        MessageType.MESSAGE_RECIEVED
-                    )
-                )
+                postMessage("You're on the right track \uD83D\uDC4D but not exactly what I was looking for.")
             }
 
             in 0..29 -> {
-                appendMsg(
-                    Message(
-                        "You are no where near the answer \uD83E\uDD26. If you need help, simply text 'help' to view a list of commands that could potentially help you.",
-                        MessageType.MESSAGE_RECIEVED
-                    )
-                )
+                postMessage("You are no where near the answer \uD83E\uDD26. If you need help, simply text 'help' to view a list of commands that could potentially help you.")
             }
 
             else -> {
-                appendMsg(
-                    Message(
-                        "Either my developer really likes bugs \uD83E\uDD37, or you just really missed the mark on this one!",
-                        MessageType.MESSAGE_RECIEVED
-                    )
-                )
+                postMessage("Either my developer really likes bugs \uD83E\uDD37, or you just really missed the mark on this one!")
             }
         }
     }
