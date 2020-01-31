@@ -7,7 +7,7 @@
     android:clipToPadding="false"
     android:focusableInTouchMode="true"
     android:background="@color/messagePageBg"
-    tools:context="com.example.emojiigame.ui.screens.MainActivity">
+    tools:context=".presentation.MainActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
