@@ -5,6 +5,7 @@
     android:paddingLeft="15dp"
     android:id="@+id/messageContainer"
     android:background="@color/messagePageBg"
+    android:visibility="invisible"
     android:clipToPadding="false">
 
     <RelativeLayout
