@@ -1,4 +1,4 @@
-package com.example.emojiigame
+package com.intuisoft.emojiigame
 
 import org.junit.Test
 
