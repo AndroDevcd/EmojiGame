@@ -24,6 +24,7 @@
         android:layout_height="30dp"
         android:src="@drawable/typing_gif"
         android:layout_gravity="left"
+        android:visibility="gone"
         android:layout_marginLeft="15dp"
         android:foregroundGravity="left"/>
 
